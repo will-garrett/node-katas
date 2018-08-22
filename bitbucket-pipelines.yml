@@ -11,9 +11,7 @@ pipelines:
           - npm install
           - npm install -g jest
           - jest fib
+  testing:
     - step:
-        testing:
-          - jest reversestring
-    - step:
-        testing:
+        script:
           - jest anagrams
