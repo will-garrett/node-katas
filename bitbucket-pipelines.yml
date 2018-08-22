@@ -9,4 +9,5 @@ pipelines:
     - step:
         script:
           - npm install
-          - jest anagrams/test.js
+          - npm install -g jest
+          - jest
