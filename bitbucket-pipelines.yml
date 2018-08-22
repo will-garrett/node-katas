@@ -2,14 +2,14 @@ image: node:8
 pipelines:
   default:
     - step:
-        name: build
+        name: Testing build
         script:
           - npm install
           - npm install -g jest
           - jest reversestring/test.js
           - jest reverseint/
     - step:
-        name: anagrams
+        name: Anagrams, queue, pyramid
         script:
           - npm install
           - npm install -g jest
