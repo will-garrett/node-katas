@@ -7,8 +7,8 @@ pipelines:
           - npm install
           - npm install -g jest
     - step:
-        name: build and test
+        name: anagrams
         script:
           - npm install
           - npm install -g jest
-          - jest
+          - jest anagrams
