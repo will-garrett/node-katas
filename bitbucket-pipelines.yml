@@ -6,9 +6,13 @@ pipelines:
         script:
           - npm install
           - npm install -g jest
+          - jest reversestring/test.js
+          - jest reverseint/
     - step:
         name: anagrams
         script:
           - npm install
           - npm install -g jest
           - jest anagrams
+          - jest queue/
+          - jest pyramid/
