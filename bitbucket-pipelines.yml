@@ -9,7 +9,11 @@ pipelines:
     - step:
         script:
           - npm install
-          - npm install -g jest  
-          - jest anagrams
+          - npm install -g jest
           - jest fib
-          - jest reverse
+    - step:
+        testing:
+          - jest reversestring
+    - step:
+        testing:
+          - jest anagrams
