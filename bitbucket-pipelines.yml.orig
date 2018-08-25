@@ -6,10 +6,13 @@ pipelines:
         script:
           - npm install
           - npm install -g jest
+<<<<<<< HEAD
+          - jest fib
   testing:
     - step:
         script:
           - jest anagrams
+=======
           - jest reversestring/test.js
           - jest reverseint/
     - step:
@@ -20,3 +23,4 @@ pipelines:
           - jest anagrams
           - jest queue/
           - jest pyramid/
+>>>>>>> f87e41ab9419ec5ba30b1a95bcd4f95b47a3661d
