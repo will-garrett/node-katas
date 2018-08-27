@@ -11,9 +11,42 @@
 //     q.peek();  // returns 1
 //     q.remove(); // returns 1
 //     q.remove(); // returns 2
+// Queue - FIFO
+// Stack - FILO
 
 const Stack = require('./stack');
 
-class Queue {}
+class Queue {
+    constructor(){
+        this.stacka = new Stack();
+        this.stackb = new Stack();
+    }
+    add(record){
+        this.stacka.push(record);
+    }
+    remove(){
+        while(this.stacka.peek()){
+            this.stackb.push(this.stacka.pop());
+        }
+        let temp = this.stackb.pop();
+        while(this.stackb.peek()){
+            this.stacka.push(this.stackb.pop());
+        }
+        return temp;
+
+    }
+    peek(){
+        while(this.stacka.peek()){
+            this.stackb.push(this.stacka.pop());
+        }
+        let temp = this.stackb.peek();
+        while(this.stackb.peek()){
+            this.stacka.push(this.stackb.pop());
+        }
+        return temp;
+    }
+
+    
+}
 
 module.exports = Queue;
