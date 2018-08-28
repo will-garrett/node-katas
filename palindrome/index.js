@@ -9,10 +9,11 @@
 
 
 function palindrome(str){ // DISCUSSABLE SOLUTION, NOT MOST EFFICIENT
-    return str.split.every((val, i)=>{
+    return str.split('').every((val, i)=>{
         return val === str[str.length - i - 1];
     });
 }
+
 
 /*
 function palindrome(str) {
