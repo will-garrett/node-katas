@@ -10,9 +10,6 @@ function string_validator(my_string){
             the_stack.push(character);
         }
         else {
-            if(the_string.empty){
-                return false;
-            }
             last_one = the_stack.peek(); 
             switch(character){
                 case ')':
@@ -45,7 +42,7 @@ function string_validator(my_string){
             }
         }
     }
-    return true;
+    return the_stack.empty();
 }
 
 module.exports = string_validator;
