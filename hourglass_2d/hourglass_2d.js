@@ -1,6 +1,5 @@
 //http://hr.gs/abbdcb
 function hourglassSum(arr) {
-    console.log(arr);
     var sum_table = {};
     let max = -63;
     for(let x=0; x < 4; x++){
