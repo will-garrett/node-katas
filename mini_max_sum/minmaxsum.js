@@ -1,3 +1,4 @@
+// http://hr.gs/bbaafe
 function minmaxsum(arr){
     let min;
     let max;
