@@ -1,21 +1,27 @@
 // https://www.hackerrank.com/challenges/crush/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
 
 function manipulator(n, queries){
-    let result_arr = Array.apply(null, Array(n)).map(Number.prototype.valueOf,0);
-    for(let query of queries){
-        let range_a = query[0]-1;
-        let range_b = query[1]-1;
-        let amt = query[2];
-        for(let i=range_a; i <= range_b; i++){
-            result_arr[i]+=amt;
+    var arr = [];
+    var max = 0;
+    // init each element of arr to 0
+    for (let l = 0; l < n; l++) {
+        arr[l] = 0;
+    }
+    // for each sum operation in queries
+    for (let i = 0; i < queries.length; i++) {
+       // update arr with number to add at index=queries[i][0]  and number to remove at index=queries[i][0]+1 => this will allow us to build each element of the final array by summing all elements before it. The aim of this trick is to lower time complexity
+        arr[queries[i][0]-1] += queries[i][2];
+        if (queries[i][1] < arr.length) {
+            arr[queries[i][1]] -= queries[i][2];
         }
     }
-    let max = result_arr[0];
-    for(let j of result_arr){
-        if(j > max){
-            max = j;
-        }
+    for (let j = 1; j < n; j++) {
+        arr[j] += arr[j-1];
     }
+    for (let k = 0; k < arr.length; k++) {
+        max = Math.max(max, arr[k]);
+    }
+    //max = Math.max(...arr); // not working for big arrays
     return max;
 }
 module.exports=manipulator;
