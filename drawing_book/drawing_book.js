@@ -11,9 +11,7 @@ function pageCount(n,p){
     else if(n%2 == 0 && p%2 != 0){
         backward = Math.ceil(backward);
     }
-    let calc = (backward > forward) ? forward : backward;
-    
-    //console.log("N:",n, "P:", p, "F:",forward, "B", backward);
-    return calc;
+    return (backward > forward) ? forward : backward;
+    //return calc;
 }
 module.exports=pageCount;
