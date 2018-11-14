@@ -1,6 +1,6 @@
 function factorial(n) {
     if(n > 0){
-        console.log(n);
+        //console.log(n);
         return n * factorial(n - 1);
     }
     else{
