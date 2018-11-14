@@ -62,7 +62,7 @@ function recursive_fib(n) {
 /**
  * @description memoization solution
 */
- const fib = memoizer(recursive_fib);
+ const fib = iterative_fib;
 
 
 /**
