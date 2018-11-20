@@ -1,62 +1,95 @@
 // https://www.hackerrank.com/challenges/queens-attack-2/problem
-// Complete the queensAttack function below.
-function tracePath(r, c, n, obstacles, movementFunc){
-    var isBlocked = function(r, c, obstacles){
-        if(obstacles.length > 0){
-            for(let o in obstacles){
-                if(obstacles[o][0] == r && obstacles[o][1] == c){
-                    obstacles.splice(o, 1);
-                    return true;
+function slope(x1, y1, x2, y2){
+    return ((y2-y1) / (x2-x1));
+}
+function queensAttack(n, k, r_q, c_q, obstacles) {
+
+    let l_sum = r_q-1;
+    let r_sum = n-r_q;
+    let u_sum = n-c_q;
+    let d_sum = c_q-1;
+
+    let dl_sum = Math.min((r_q-1), (c_q-1))
+    let ul_sum = Math.min((r_q-1), (n-c_q));
+    let dr_sum = Math.min(n-r_q, c_q-1);
+    let ur_sum = Math.min(n-c_q, n-r_q);
+
+    let temp_sum = 0;
+
+    for(let o of obstacles){
+        let the_slope = slope(r_q, c_q, o[0], o[1]);
+        switch(the_slope){
+            case Infinity:
+                    // UP
+                    temp_sum = o[1]-c_q-1;
+                    u_sum = (u_sum > temp_sum) ? temp_sum : u_sum;
+                break;
+            case -Infinity:
+                    // DOWN
+                    temp_sum = c_q-o[1]-1
+                    d_sum = (d_sum > temp_sum) ? temp_sum : d_sum;
+                break;
+            case 0:
+                if(o[0]<r_q){
+                    // LEFT
+                    temp_sum = r_q - o[0] - 1;
+                    l_sum = (l_sum > temp_sum) ? temp_sum : l_sum;
                 }
-            }
+                else{
+                    // RIGHT
+                    temp_sum = o[0]- r_q - 1;
+                    r_sum = (r_sum > temp_sum) ? temp_sum : r_sum;
+                }
+                break;
+            case 1:
+                if(o[1]<c_q){
+                    // DOWN LEFT
+                    temp_sum = r_q-o[0]-1;
+                    dl_sum = (dl_sum > temp_sum) ? temp_sum : dl_sum;
+                }
+                else{
+                    // UP RIGHT
+                    temp_sum = o[0]-r_q-1;
+                    ur_sum = (ur_sum > temp_sum) ? temp_sum : ur_sum;
+                }
+                break;
+            case -1:
+                if(o[1] < c_q){
+                    // DOWN RIGHT
+                    temp_sum = o[0]-r_q-1;
+                    dr_sum = (dr_sum > temp_sum) ? temp_sum : dr_sum;
+                }
+                else{
+                    // UP LEFT
+                    temp_sum = r_q-o[0]-1;
+                    ul_sum = (ul_sum > temp_sum) ? temp_sum : ul_sum;
+                }
+                break;
+            default:
+                //obstacles.splice(o, 1);
         }
-        return false;
     }
+    return l_sum + r_sum + u_sum + d_sum + dr_sum + dl_sum + ur_sum + ul_sum;
+    
+}
+
+function tracePath(r, c, n, movementFunc){ 
     let pathSum = 0;
     current = [r, c];
     current = movementFunc(current[0], current[1]);
     while(current[0] > 0 && current[0] <= n && current[1] > 0 && current[1] <= n){
-        if(isBlocked(current[0], current[1], obstacles)){
-            break;
-        }
-        else{
-            pathSum++;
-        }
+        pathSum++;
         current = movementFunc(current[0], current[1]);
     }
     return pathSum;
 }
-
-function queensAttack(n, k, r_q, c_q, obstacles) {
-    let attackSum = 0;
-
-    var moveUp = function (r, c){ return [r,c+1]; }
-    var moveDown = function(r, c){ return [r, c-1]; }
-    var moveLeft = function(r, c){ return [r-1, c]; }
-    var moveRight = function(r, c){ return [r+1, c]; }
-    var moveUpLeft = function(r, c){ return [r-1, c+1]; }
-    var moveUpRight = function(r,c){ return [r+1, c+1]; }
-    var moveDownLeft = function(r, c){return [r-1, c-1];}
-    var moveDownRight = function(r, c){ return [r+1, c-1]; }
-    
-    
-    // TRACE UP
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveUp);
-    // TRACE DOWN
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveDown);
-    // TRACE LEFT
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveLeft);
-    // TRACE RIGHT
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveRight);
-    // TRACE UP LEFT
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveUpLeft);
-    // TRACE UP RIGHT
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveUpRight);
-    // TRACE DOWN LEFT
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveDownLeft);
-    // TRACE DOWN RIGHT
-    attackSum += tracePath(r_q, c_q, n, obstacles, moveDownRight);
-
-    return attackSum;
+function traceDistance(x1, y1, x2, y2, movementFunc){
+    let pathSum = 0;
+    current = movementFunc(x1, y1);
+    while(current[0] > 0 && current[0] < x2 && current[1] > 0 && current[1] < y2){
+        pathSum++;
+        current = movementFunc(current[0], current[1]);
+    }
+    return pathSum;
 }
 module.exports = queensAttack;
