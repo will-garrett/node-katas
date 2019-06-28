@@ -5,5 +5,6 @@ test('Correctly identifies count of prime numbers between two values ', () => {
     
     expect(prime_counter(5, 10)).toEqual(2);
     expect(prime_counter(5, 15)).toEqual(4);
+    expect(prime_counter(2, 500)).toEqual(95);
     
 });
