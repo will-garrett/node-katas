@@ -1,0 +1,14 @@
+{
+  "name": "anagram_primes",
+  "version": "1.0.0",
+  "description": "Anagram grouping using prime number multiplication",
+  "main": "generate_primes.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "William Garrett <grillatwartime@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^24.8.0"
+  }
+}

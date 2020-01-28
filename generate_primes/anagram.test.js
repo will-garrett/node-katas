@@ -28,7 +28,10 @@ test('should return the same value for two words containing same letters', () =>
   console.log(word_b, ":", value_b);
   console.log(sorted_a, ":", val_sorted_a);
   console.log(sorted_b, ":", val_sorted_b);
-
+  console.log(Number.MAX_VALUE);
+  console.log(value_a);
+  console.log(Number.MAX_SAFE_INTEGER);
+  console.log(Number.MAX_SAFE_INTEGER > val_sorted_a);
   // TEST SHOULD PASS
   expect(value_a).toEqual(value_b);
 });
