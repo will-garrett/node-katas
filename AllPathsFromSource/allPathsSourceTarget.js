@@ -3,22 +3,25 @@
  * @return {number[][]}
  */
 const allPathsSourceTarget = function(graph) {
-  let paths = [];
-  let stack = [];
-  const depthFS = function(nodes, target, index) {
-    stack.push(index)
-    if (index == target) {
-      const path = stack.slice();
-      paths.push(path);
-      return;
-    }
-    for (let i = 0; i < nodes.length; i++) {
-      depthFS(graph[nodes[i]], target, nodes[i]);
-      stack.pop();
-    }
-    return paths;
+  const res = [];
+  const path = [];  
+        
+  path.push(0);
+ 
+  dfsSearch(0); 
+  
+  function dfsSearch(node) {
+       
+      if (node == graph.length - 1) {           
+          res.push(path.slice(0));           
+      } else
+          for (nextNode of graph[node]) {
+              path.push(nextNode);
+              dfsSearch(nextNode);
+              path.pop();
+          }
   }
-  return depthFS(graph[0], graph.length-1, 0);
+  return res;
 };
 
 module.exports = allPathsSourceTarget;
