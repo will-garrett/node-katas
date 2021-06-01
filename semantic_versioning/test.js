@@ -15,7 +15,7 @@ test('should return 3.9 over 3.9b', () => {
   expect(highestVersion("3.9b", "3.9")).toEqual("3.9");
 });
 
-test('should return 3.9a over 3.9b', () => {
+test('should return 3.9b over 3.9a', () => {
   expect(highestVersion("3.9a", "3.9b")).toEqual("3.9b");
   expect(highestVersion("3.9b", "3.9a")).toEqual("3.9b");
 });
